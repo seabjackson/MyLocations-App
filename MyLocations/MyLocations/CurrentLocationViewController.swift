@@ -36,10 +36,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return 
         }
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.startUpdatingLocation()
-        
+        startLocationManager()
+        updateLabels()
     }
 
     override func viewDidLoad() {
@@ -81,8 +79,29 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         let newLocation = locations.last!
         print("didUpdateLocations \(newLocation)")
         
-        location = newLocation
-        updateLabels()
+        // 1
+        if newLocation.timestamp.timeIntervalSinceNow <  -5 {
+            return
+        }
+        
+        // 2
+        if newLocation.horizontalAccuracy < 0 {
+            return
+        }
+        
+        // 3
+        if location == nil || location!.horizontalAccuracy > newLocation.horizontalAccuracy {
+            // 4
+            lastLocationError = nil
+            location = newLocation
+            updateLabels()
+            
+            // 5
+            if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
+                print("*** We're done!")
+                stopLocationManager()
+            }
+        }
     }
     
     func updateLabels() {
@@ -113,7 +132,15 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             
             messageLabel.text = statusMessage
-            print("This is the status message \(messageLabel.text)")
+        }
+    }
+    
+    func startLocationManager() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            updatingLocation = true
         }
     }
     
