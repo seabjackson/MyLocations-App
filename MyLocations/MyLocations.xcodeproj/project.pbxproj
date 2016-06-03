@@ -13,6 +13,9 @@
 		2A05B1FE1CC00D19003CF481 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A05B1FC1CC00D19003CF481 /* Main.storyboard */; };
 		2A05B2001CC00D19003CF481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A05B1FF1CC00D19003CF481 /* Assets.xcassets */; };
 		2A05B2031CC00D19003CF481 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A05B2011CC00D19003CF481 /* LaunchScreen.storyboard */; };
+		2A42D8841CFA36DB00C9F131 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42D8831CFA36DB00C9F131 /* LocationDetailsViewController.swift */; };
+		2A8BEFF31CFCA141005C4FE9 /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8BEFF21CFCA141005C4FE9 /* CategoryPickerViewController.swift */; };
+		2AF59FA11D02361500038B1C /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF59FA01D02361500038B1C /* HudView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		2A05B1FF1CC00D19003CF481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A05B2021CC00D19003CF481 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A05B2041CC00D19003CF481 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A42D8831CFA36DB00C9F131 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationDetailsViewController.swift; path = ../LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		2A8BEFF21CFCA141005C4FE9 /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
+		2AF59FA01D02361500038B1C /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +63,12 @@
 			isa = PBXGroup;
 			children = (
 				2A05B1F61CC00D19003CF481 /* AppDelegate.swift */,
+				2A42D8831CFA36DB00C9F131 /* LocationDetailsViewController.swift */,
+				2A8BEFF21CFCA141005C4FE9 /* CategoryPickerViewController.swift */,
 				2A05B1F81CC00D19003CF481 /* CurrentLocationViewController.swift */,
 				2A05B1FA1CC00D19003CF481 /* SecondViewController.swift */,
 				2A05B1FC1CC00D19003CF481 /* Main.storyboard */,
+				2AF59FA01D02361500038B1C /* HudView.swift */,
 				2A05B1FF1CC00D19003CF481 /* Assets.xcassets */,
 				2A05B2011CC00D19003CF481 /* LaunchScreen.storyboard */,
 				2A05B2041CC00D19003CF481 /* Info.plist */,
@@ -139,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A42D8841CFA36DB00C9F131 /* LocationDetailsViewController.swift in Sources */,
 				2A05B1FB1CC00D19003CF481 /* SecondViewController.swift in Sources */,
+				2AF59FA11D02361500038B1C /* HudView.swift in Sources */,
 				2A05B1F71CC00D19003CF481 /* AppDelegate.swift in Sources */,
+				2A8BEFF31CFCA141005C4FE9 /* CategoryPickerViewController.swift in Sources */,
 				2A05B1F91CC00D19003CF481 /* CurrentLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MyLocations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -264,6 +277,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MyLocations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

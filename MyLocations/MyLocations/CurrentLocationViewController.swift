@@ -70,6 +70,15 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TagLocation" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! LocationDetailsViewController
+            
+            controller.coordinate = location!.coordinate
+            controller.placemark = placemark
+        }
+    }
     func showLocationServicesDeniedAlert() {
         let alert = UIAlertController(title: "Location Service Disabled", message: "Please enable location services for this app in Settings.", preferredStyle: .Alert)
         
@@ -82,7 +91,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("didFailWithError \(error)")
+       // print("didFailWithError \(error)")
         
         if error.code == CLError.LocationUnknown.rawValue {
             return
@@ -97,7 +106,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
-        print("didUpdateLocations \(newLocation)")
+        // print("didUpdateLocations \(newLocation)")
         
         // 1
         if newLocation.timestamp.timeIntervalSinceNow <  -5 {
@@ -123,7 +132,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             
             // 5
             if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
-                print("*** We're done!")
+                // print("*** We're done!")
                 stopLocationManager()
                 configureGetbutton()
                 
@@ -134,13 +143,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             
             // The new code begins here:
             if !performingReverseGeocoding {
-                print("*** Going to geocode")
+               // print("*** Going to geocode")
                 performingReverseGeocoding = true
                 
                 geocoder.reverseGeocodeLocation(newLocation, completionHandler: {
                     placemarks, error in
                     
-                    print("*** Found placemarks: \(placemarks), error: \(error)")
+                    // print("*** Found placemarks: \(placemarks), error: \(error)")
                     self.lastGeocodingError = error
                     if error == nil, let p = placemarks where !p.isEmpty {
                         self.placemark = p.last!
@@ -156,7 +165,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             let timeInterval = newLocation.timestamp.timeIntervalSinceDate(location!.timestamp)
             
             if timeInterval > 10 {
-                print("*** Force done!")
+                // print("*** Force done!")
                 stopLocationManager()
                 updateLabels()
                 configureGetbutton()
@@ -181,6 +190,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else {
                 addressLabel.text = "No Address Found"
             }
+            
         } else {
             latitudeLabel.text = ""
             longitudeLabel.text = ""
@@ -188,6 +198,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             tagButton.hidden = true
             
             let statusMessage: String
+            
             if let error = lastLocationError {
                 if error.domain == kCLErrorDomain && error.code == CLError.Denied.rawValue {
                     statusMessage = "Location Services Disabled"
@@ -245,7 +256,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             updatingLocation = true
             
             // set up a timer object to send out time out messages
-            timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(CurrentLocationViewController.didTimeOut), userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(didTimeOut), userInfo: nil, repeats: false)
         }
     }
     
@@ -269,7 +280,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func didTimeOut() {
-        print("*** Time out")
+       // print("*** Time out")
         
         if location == nil {
             stopLocationManager()
