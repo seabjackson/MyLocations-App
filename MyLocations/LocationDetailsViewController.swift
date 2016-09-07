@@ -9,6 +9,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 private let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -19,10 +20,14 @@ private let dateFormatter: NSDateFormatter = {
 
 class LocationDetailsViewController: UITableViewController {
     
+    var managedObjectContext: NSManagedObjectContext!
+    
     var categoryName = "No Category"
     
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark: CLPlacemark?
+    
+    var date = NSDate()
     
     
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -36,11 +41,23 @@ class LocationDetailsViewController: UITableViewController {
         let hudView = HudView.hudInView(navigationController!.view, animated: true)
         hudView.text = "Tagged"
         
+        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+        location.locationDescription = descriptionTextView.text
+        location.category = categoryName
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        location.date = date
+        location.placemark = placemark
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            fatalError("Error: \(error)")
+        }
+        
         afterDelay(0.6) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        // dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func cancel() {
@@ -68,7 +85,7 @@ class LocationDetailsViewController: UITableViewController {
             addressLabel.text = "No Address Found"
         }
         
-        dateLabel.text = formatDate(NSDate())
+        dateLabel.text = formatDate(date)
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LocationDetailsViewController.hideKeyboard(_:)))
         gestureRecognizer.cancelsTouchesInView = false
