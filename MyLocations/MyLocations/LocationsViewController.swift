@@ -43,36 +43,13 @@ class LocationsViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as! LocationCell
         
         let location = locations[indexPath.row]
+        cell.configureForLocation(location)
         
-        let descriptionLabel = cell.viewWithTag(100) as! UILabel
-        descriptionLabel.text = location.locationDescription
-        
-
-        let addressLabel = cell.viewWithTag(101) as! UILabel
-        if let placemark = location.placemark {
-            var text = ""
-            if let s = placemark.subThoroughfare {
-                text += s + " "
-            }
-            
-            if let s = placemark.thoroughfare {
-                text += s + ", "
-            }
-            
-            if let s = placemark.locality {
-                text += s
-            }
-            addressLabel.text = text
-        } else {
-            addressLabel.text = ""
-        }
-
         return cell
     }
- 
 
     /*
     // Override to support conditional editing of the table view.
