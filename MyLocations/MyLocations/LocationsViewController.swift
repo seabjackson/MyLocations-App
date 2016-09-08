@@ -20,10 +20,11 @@ class LocationsViewController: UITableViewController {
         let fetchRequest = NSFetchRequest()
         let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectcontext)
         fetchRequest.entity = entity
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptor1 = NSSortDescriptor(key: "category", ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: "date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         fetchRequest.fetchBatchSize = 20
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.managedObjectcontext, sectionNameKeyPath: nil, cacheName: "Locations")
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.managedObjectcontext, sectionNameKeyPath: "category", cacheName: "Locations")
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
@@ -32,6 +33,7 @@ class LocationsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performFetch()
+        navigationItem.rightBarButtonItem = editButtonItem()
     }
     
     func performFetch() {
@@ -50,8 +52,12 @@ class LocationsViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections!.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
+        return sectionInfo.name
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -62,6 +68,20 @@ class LocationsViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            managedObjectcontext.deleteObject(location)
+            
+            do {
+                try managedObjectcontext.save()
+            } catch {
+                fatalCoreDataError(error)
+            }
+        }
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EditLocation" {
