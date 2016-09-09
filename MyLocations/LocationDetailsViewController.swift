@@ -34,15 +34,12 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     var descriptionText = ""
-    
     var categoryName = "No Category"
-    
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark: CLPlacemark?
-    
     var date = NSDate()
-    
     var image: UIImage?
+    var observer: AnyObject!
     
     
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -213,15 +210,20 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     func listenForBackgroundNotification() {
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: .mainQueue()) { _ in
-            if self.presentedViewController != nil {
-                self.dismissViewControllerAnimated(false, completion: nil)
+        observer = NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: .mainQueue()) { [weak self] _ in
+            if let strongSelf = self {
+                if strongSelf.presentedViewController != nil {
+                    strongSelf.dismissViewControllerAnimated(false, completion: nil)
+                }
+                 strongSelf.descriptionTextView.resignFirstResponder()
             }
-            
-            self.descriptionTextView.resignFirstResponder()
         }
     }
     
+    deinit {
+        print("*** deinit \(self)")
+        NSNotificationCenter.defaultCenter().removeObserver(observer)
+    }
 }
 
 extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
