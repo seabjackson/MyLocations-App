@@ -18,13 +18,17 @@ class LocationsViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest()
+        
         let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectcontext)
         fetchRequest.entity = entity
+        
         let sortDescriptor1 = NSSortDescriptor(key: "category", ascending: true)
         let sortDescriptor2 = NSSortDescriptor(key: "date", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        
         fetchRequest.fetchBatchSize = 20
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.managedObjectcontext, sectionNameKeyPath: "category", cacheName: "Locations")
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectcontext, sectionNameKeyPath: "category", cacheName: "Locations")
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
@@ -32,8 +36,9 @@ class LocationsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        performFetch()
         navigationItem.rightBarButtonItem = editButtonItem()
+        performFetch()
+        
     }
     
     func performFetch() {
@@ -52,6 +57,11 @@ class LocationsViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo = fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return fetchedResultsController.sections!.count
     }
     
@@ -111,22 +121,22 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
                 print("*** NSFetchedResultsChangeInsert (object)")
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
             
-        case .Delete:
-            print("*** NSFetchedResultsChangeDelete (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            
-        case .Update:
-            print("*** NSFetchedResultsChangeUpdate (object)")
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? LocationCell {
-                let location = controller.objectAtIndexPath(indexPath!) as! Location
-                cell.configureForLocation(location)
-            }
-            
-        case .Move:
-            print("*** NSFetchedResultsChangeMove (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-       
+            case .Delete:
+                print("*** NSFetchedResultsChangeDelete (object)")
+                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                
+            case .Update:
+                print("*** NSFetchedResultsChangeUpdate (object)")
+                if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? LocationCell {
+                    let location = controller.objectAtIndexPath(indexPath!) as! Location
+                    cell.configureForLocation(location)
+                }
+                
+            case .Move:
+                print("*** NSFetchedResultsChangeMove (object)")
+                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+           
         }
     }
     
