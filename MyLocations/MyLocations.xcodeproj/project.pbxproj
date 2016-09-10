@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12116DCA1D81E802003FD2C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12116DC91D81E802003FD2C0 /* MapKit.framework */; };
 		12116DCC1D81E916003FD2C0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DCB1D81E916003FD2C0 /* MapViewController.swift */; };
+		12116DCE1D83E2B3003FD2C0 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DCD1D83E2B2003FD2C0 /* UIImage+Resize.swift */; };
+		12116DD01D83FBC0003FD2C0 /* Swift+AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DCF1D83FBC0003FD2C0 /* Swift+AddText.swift */; };
 		12FE10B21D80DFEE0018A7DD /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */; };
 		12FE10B41D80FED60018A7DD /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B31D80FED60018A7DD /* LocationCell.swift */; };
 		2A05B1F71CC00D19003CF481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A05B1F61CC00D19003CF481 /* AppDelegate.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		12116DC91D81E802003FD2C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		12116DCB1D81E916003FD2C0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
+		12116DCD1D83E2B2003FD2C0 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		12116DCF1D83FBC0003FD2C0 /* Swift+AddText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+AddText.swift"; sourceTree = "<group>"; };
 		12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		12FE10B31D80FED60018A7DD /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		2A05B1F31CC00D19003CF481 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,11 +90,13 @@
 				12116DCB1D81E916003FD2C0 /* MapViewController.swift */,
 				2A05B1F61CC00D19003CF481 /* AppDelegate.swift */,
 				12FE10B31D80FED60018A7DD /* LocationCell.swift */,
+				12116DCD1D83E2B2003FD2C0 /* UIImage+Resize.swift */,
 				2A42D8831CFA36DB00C9F131 /* LocationDetailsViewController.swift */,
 				2A14C2871D037FF10071284C /* DataModel.xcdatamodeld */,
 				2A0AFAEB1D0295E70018633D /* Functions.swift */,
 				2A8BEFF21CFCA141005C4FE9 /* CategoryPickerViewController.swift */,
 				2A05B1F81CC00D19003CF481 /* CurrentLocationViewController.swift */,
+				12116DCF1D83FBC0003FD2C0 /* Swift+AddText.swift */,
 				2A05B1FA1CC00D19003CF481 /* SecondViewController.swift */,
 				2A05B1FC1CC00D19003CF481 /* Main.storyboard */,
 				2AF59FA01D02361500038B1C /* HudView.swift */,
@@ -175,11 +181,13 @@
 			files = (
 				2A42D8841CFA36DB00C9F131 /* LocationDetailsViewController.swift in Sources */,
 				2A14C2891D037FF10071284C /* DataModel.xcdatamodeld in Sources */,
+				12116DD01D83FBC0003FD2C0 /* Swift+AddText.swift in Sources */,
 				2A14C28D1D0383A70071284C /* Location.swift in Sources */,
 				2A05B1FB1CC00D19003CF481 /* SecondViewController.swift in Sources */,
 				12FE10B21D80DFEE0018A7DD /* LocationsViewController.swift in Sources */,
 				2AF59FA11D02361500038B1C /* HudView.swift in Sources */,
 				12116DCC1D81E916003FD2C0 /* MapViewController.swift in Sources */,
+				12116DCE1D83E2B3003FD2C0 /* UIImage+Resize.swift in Sources */,
 				12FE10B41D80FED60018A7DD /* LocationCell.swift in Sources */,
 				2A0AFAEC1D0295E70018633D /* Functions.swift in Sources */,
 				2A14C28C1D0383A70071284C /* Location+CoreDataProperties.swift in Sources */,

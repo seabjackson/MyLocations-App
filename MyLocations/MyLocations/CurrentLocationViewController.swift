@@ -225,32 +225,29 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
         // 1 
         var line1 = ""
+        line1.addText(placemark.subThoroughfare)
+        line1.addText(placemark.thoroughfare, withSeparator: " ")
         
         // 2
-        if let s = placemark.subThoroughfare {
-            line1 += s + " "
-        }
-        
-        // 3
-        if let s = placemark.thoroughfare {
-            line1 += s
-        }
-        
-        // 4
         var line2 = ""
+        line2.addText(placemark.locality)
+        line2.addText(placemark.administrativeArea, withSeparator: " ")
+        line2.addText(placemark.postalCode, withSeparator: " ")
         
-        if let s = placemark.locality {
-            line2 += s + " "
+        line1.addText(line2, withSeparator: "\n")
+        return line1
+    }
+    
+    func addText(text: String?, toLine line: String, withSeparator separator: String) -> String {
+        var result = line
+        if let text = text {
+            if !line.isEmpty {
+                result += separator
+            }
+            result += text
         }
-        if let s = placemark.administrativeArea {
-            line2 += s + " "
-        }
-        if let s = placemark.postalCode {
-            line2 += s
-        }
+        return result
         
-        // 5
-        return line1 + "\n" + line2
     }
     
     func startLocationManager() {
