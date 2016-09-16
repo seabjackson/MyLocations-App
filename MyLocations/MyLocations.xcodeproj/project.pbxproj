@@ -14,6 +14,7 @@
 		12116DD21D840842003FD2C0 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DD11D840842003FD2C0 /* MyTabBarController.swift */; };
 		12116DD41D8409E3003FD2C0 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DD31D8409E3003FD2C0 /* MyNavigationController.swift */; };
 		12116DD61D840AD8003FD2C0 /* MyImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12116DD51D840AD8003FD2C0 /* MyImagePickerController.swift */; };
+		12460EDB1D8C7C5F00199B07 /* Sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 12460EDA1D8C7C5F00199B07 /* Sound.caf */; };
 		12FE10B21D80DFEE0018A7DD /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */; };
 		12FE10B41D80FED60018A7DD /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B31D80FED60018A7DD /* LocationCell.swift */; };
 		2A05B1F71CC00D19003CF481 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A05B1F61CC00D19003CF481 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		12116DD11D840842003FD2C0 /* MyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		12116DD31D8409E3003FD2C0 /* MyNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		12116DD51D840AD8003FD2C0 /* MyImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImagePickerController.swift; sourceTree = "<group>"; };
+		12460EDA1D8C7C5F00199B07 /* Sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.caf; sourceTree = "<group>"; };
 		12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		12FE10B31D80FED60018A7DD /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		2A05B1F31CC00D19003CF481 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,11 +70,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12460ED91D8C7C5F00199B07 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				12460EDA1D8C7C5F00199B07 /* Sound.caf */,
+			);
+			name = Sound;
+			path = "../../../Raywenderlich/Raywenderlich The iOS Apprentice Beginning iOS Development with Swift 2 4th Edition/The iOS Apprentice 3 - MyLocations/Resources/Sound";
+			sourceTree = "<group>";
+		};
 		2A05B1EA1CC00D18003CF481 = {
 			isa = PBXGroup;
 			children = (
 				12116DC91D81E802003FD2C0 /* MapKit.framework */,
 				2A05B1F51CC00D19003CF481 /* MyLocations */,
+				12460ED91D8C7C5F00199B07 /* Sound */,
 				2A05B1F41CC00D19003CF481 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -174,6 +186,7 @@
 			files = (
 				2A05B2031CC00D19003CF481 /* LaunchScreen.storyboard in Resources */,
 				2A05B2001CC00D19003CF481 /* Assets.xcassets in Resources */,
+				12460EDB1D8C7C5F00199B07 /* Sound.caf in Resources */,
 				2A05B1FE1CC00D19003CF481 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MyLocations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -325,6 +339,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MyLocations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

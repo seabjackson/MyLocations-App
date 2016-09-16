@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import QuartzCore
+import AudioToolbox
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -52,6 +53,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         return button
     }()
     
+    // sounds
+    var soundID: SystemSoundID = 0
+    
     @IBAction func getLocation() {
         let authStatus = CLLocationManager.authorizationStatus()
         
@@ -87,6 +91,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         // Do any additional setup after loading the view, typically from a nib.
         updateLabels()
         configureGetbutton()
+        loadSoundEffect("Sound.caf")
     }
     
     // MARK: - Logo View
@@ -145,6 +150,29 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         logoButton.layer.removeAllAnimations()
         logoButton.removeFromSuperview()
     }
+    
+    // MARK: - Sound Effects
+    
+    func loadSoundEffect(name: String) {
+        if let path = NSBundle.mainBundle().pathForResource(name, ofType: nil) {
+            let fileURL = NSURL.fileURLWithPath(path, isDirectory: false)
+            let error = AudioServicesCreateSystemSoundID(fileURL, &soundID)
+            if error != kAudioServicesNoError {
+                print("Error code \(error) loading sound at path: \(path)")
+            }
+        }
+    }
+    
+    func unloadSoundEffect() {
+        AudioServicesDisposeSystemSoundID(soundID)
+        soundID = 0
+    }
+    
+    func playSoundEffect() {
+        AudioServicesPlaySystemSound(soundID)
+    }
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "TagLocation" {
@@ -229,6 +257,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                     // print("*** Found placemarks: \(placemarks), error: \(error)")
                     self.lastGeocodingError = error
                     if error == nil, let p = placemarks where !p.isEmpty {
+                        if self.placemark == nil {
+                            print("first time!")
+                            self.playSoundEffect()
+                        }
                         self.placemark = p.last!
                     } else {
                         self.placemark = nil
