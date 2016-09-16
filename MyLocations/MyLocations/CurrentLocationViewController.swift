@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import CoreData
+import QuartzCore
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -35,6 +36,21 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
+    @IBOutlet weak var latitudeTextLabel: UILabel!
+    @IBOutlet weak var longitudeTextLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    
+    var logoVisible = false
+    
+    lazy var logoButton: UIButton = {
+        let button = UIButton(type: .Custom)
+        button.setBackgroundImage(UIImage(named: "Logo"), forState: .Normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(CurrentLocationViewController.getLocation), forControlEvents: .TouchUpInside)
+        button.center.x = CGRectGetMidX(self.view.bounds)
+        button.center.y = 220
+        return button
+    }()
     
     @IBAction func getLocation() {
         let authStatus = CLLocationManager.authorizationStatus()
@@ -47,6 +63,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         if authStatus == .Denied || authStatus == .Restricted {
             showLocationServicesDeniedAlert()
             return 
+        }
+        
+        if logoVisible {
+            hideLogoView()
         }
         
         if updatingLocation {
@@ -68,10 +88,21 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         updateLabels()
         configureGetbutton()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Logo View
+    
+    func showLogoView() {
+        if !logoVisible {
+            logoVisible = true
+            containerView.hidden = true
+            view.addSubview(logoButton)
+        }
+    }
+    
+    func hideLogoView() {
+        logoVisible = false
+        containerView.hidden = false
+        logoButton.removeFromSuperview()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -196,11 +227,16 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 addressLabel.text = "No Address Found"
             }
             
+            latitudeTextLabel.hidden = false
+            longitudeTextLabel.hidden = false
+            
         } else {
             latitudeLabel.text = ""
             longitudeLabel.text = ""
             addressLabel.text = ""
             tagButton.hidden = true
+            latitudeTextLabel.hidden = true
+            longitudeTextLabel.hidden = true
             
             let statusMessage: String
             
@@ -215,7 +251,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else if updatingLocation {
                 statusMessage = "Seaching..."
             } else {
-                statusMessage = "Tap 'Get My Location' to Start"
+                statusMessage = ""
+                showLogoView()
             }
             
             messageLabel.text = statusMessage

@@ -106,6 +106,20 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // set up the appearance of the table view
+        tableView.backgroundColor = UIColor.blackColor()
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .White
+        
+        descriptionTextView.textColor = UIColor.whiteColor()
+        descriptionTextView.backgroundColor = UIColor.blackColor()
+        
+        addPhotoLabel.textColor = UIColor.whiteColor()
+        addPhotoLabel.highlightedTextColor = addPhotoLabel.textColor
+        
+        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+        addressLabel.highlightedTextColor = addressLabel.textColor
+        
         if let location = locationToEdit {
             title = "Edit Location"
             if location.hasPhoto {
@@ -142,27 +156,14 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     func stringFromPlacemark(placemark: CLPlacemark) -> String {
-        var text = ""
-        
-        if let s = placemark.subThoroughfare {
-            text += s + " "
-        }
-        if let s = placemark.thoroughfare {
-            text += s + ", "
-        }
-        if let s = placemark.locality {
-            text += s + ", "
-        }
-        if let s = placemark.administrativeArea {
-            text += s + " "
-        }
-        if let s = placemark.postalCode {
-            text += s + ", "
-        }
-        if let s = placemark.country {
-            text += s
-        }
-        return text
+        var line = ""
+        line.addText(placemark.subThoroughfare)
+        line.addText(placemark.thoroughfare, withSeparator: " ")
+        line.addText(placemark.locality, withSeparator: ", ")
+        line.addText(placemark.administrativeArea, withSeparator: ", ")
+        line.addText(placemark.postalCode, withSeparator: " ")
+        line.addText(placemark.country, withSeparator: ", ")
+        return line
     }
     
     func formatDate(date: NSDate) -> String {
@@ -222,6 +223,29 @@ class LocationDetailsViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.blackColor()
+        if let textLabel = cell.textLabel {
+            textLabel.textColor = UIColor.whiteColor()
+            textLabel.highlightedTextColor = textLabel.textColor
+        }
+        
+        if let detailLabel = cell.detailTextLabel {
+            detailLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+            detailLabel.highlightedTextColor = detailLabel.textColor
+        }
+        
+        let selectionView = UIView(frame: CGRect.zero)
+        selectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        cell.selectedBackgroundView = selectionView
+        
+        if indexPath.row == 2 {
+            let addressLabel = cell.viewWithTag(100) as! UILabel
+            addressLabel.textColor = UIColor.whiteColor()
+            addressLabel.highlightedTextColor = addressLabel.textColor
+        }
+    }
+    
     func showImage(image: UIImage) {
         imageView.image = image
         imageView.hidden = false
@@ -249,18 +273,20 @@ class LocationDetailsViewController: UITableViewController {
 extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func takePhotoWithCamera() {
-        let imagePicker = UIImagePickerController()
+        let imagePicker = MyImagePickerController()
         imagePicker.sourceType = .Camera
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        imagePicker.view.tintColor = view.tintColor
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func choosePhotoFromLibray() {
-        let imagePicker = UIImagePickerController()
+        let imagePicker = MyImagePickerController()
         imagePicker.sourceType = .PhotoLibrary
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        imagePicker.view.tintColor = view.tintColor
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
@@ -281,8 +307,8 @@ extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavi
         alertController.addAction(cancelAction)
         
         // add the take photo action
-        let takePhotAction = UIAlertAction(title: "Take Photo", style: .Default, handler: { _  in self.takePhotoWithCamera() })
-        alertController.addAction(takePhotAction)
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: { _  in self.takePhotoWithCamera() })
+        alertController.addAction(takePhotoAction)
         
         // add the choose photo from library action
         let chooseFromLibraryAction = UIAlertAction(title: "Photo Library", style: .Default, handler: { _ in self.choosePhotoFromLibray() })
