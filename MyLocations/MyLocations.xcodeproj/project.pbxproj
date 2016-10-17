@@ -19,6 +19,7 @@
 		1230BF991DB4A8E6001D416A /* FlickrConvenienceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1230BF981DB4A8E6001D416A /* FlickrConvenienceAPI.swift */; };
 		1230BF9B1DB4A912001D416A /* FlickrConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1230BF9A1DB4A912001D416A /* FlickrConstants.swift */; };
 		1230BF9D1DB4A956001D416A /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1230BF9C1DB4A956001D416A /* GCDBlackBox.swift */; };
+		1230BF9F1DB4AEA2001D416A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1230BF9E1DB4AEA2001D416A /* PhotosViewController.swift */; };
 		12460EDB1D8C7C5F00199B07 /* Sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 12460EDA1D8C7C5F00199B07 /* Sound.caf */; };
 		12FE10B21D80DFEE0018A7DD /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */; };
 		12FE10B41D80FED60018A7DD /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE10B31D80FED60018A7DD /* LocationCell.swift */; };
@@ -48,6 +49,7 @@
 		1230BF981DB4A8E6001D416A /* FlickrConvenienceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConvenienceAPI.swift; sourceTree = "<group>"; };
 		1230BF9A1DB4A912001D416A /* FlickrConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConstants.swift; sourceTree = "<group>"; };
 		1230BF9C1DB4A956001D416A /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		1230BF9E1DB4AEA2001D416A /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		12460EDA1D8C7C5F00199B07 /* Sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.caf; sourceTree = "<group>"; };
 		12FE10B11D80DFEE0018A7DD /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		12FE10B31D80FED60018A7DD /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				2A05B1F81CC00D19003CF481 /* CurrentLocationViewController.swift */,
 				12116DCF1D83FBC0003FD2C0 /* Swift+AddText.swift */,
 				2A05B1FC1CC00D19003CF481 /* Main.storyboard */,
+				1230BF9E1DB4AEA2001D416A /* PhotosViewController.swift */,
 				1230BF971DB4A8B8001D416A /* Model */,
 				121F13281DB40E3400C20D9C /* LocationDetailsViewController.swift */,
 				12116DD51D840AD8003FD2C0 /* MyImagePickerController.swift */,
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12116DD41D8409E3003FD2C0 /* MyNavigationController.swift in Sources */,
+				1230BF9F1DB4AEA2001D416A /* PhotosViewController.swift in Sources */,
 				2A14C2891D037FF10071284C /* DataModel.xcdatamodeld in Sources */,
 				12116DD61D840AD8003FD2C0 /* MyImagePickerController.swift in Sources */,
 				12116DD01D83FBC0003FD2C0 /* Swift+AddText.swift in Sources */,

@@ -374,6 +374,7 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="SeE-SS-w8e" kind="relationship" relationship="viewControllers" id="ln8-Zh-vou"/>
                         <segue destination="9ZI-iP-S9Y" kind="relationship" relationship="viewControllers" id="vf5-IH-ReZ"/>
+                        <segue destination="hd7-3N-Fel" kind="relationship" relationship="viewControllers" id="HH7-rb-hH4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -483,19 +484,20 @@
             </objects>
             <point key="canvasLocation" x="-756" y="1096"/>
         </scene>
-        <!--View Controller-->
+        <!--Photos View Controller-->
         <scene sceneID="ZNa-ZD-0ED">
             <objects>
-                <viewController id="hd7-3N-Fel" sceneMemberID="viewController">
+                <viewController id="hd7-3N-Fel" customClass="PhotosViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="moY-ZO-exh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="nSi-UY-34u"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oye-rH-FBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-757" y="1843"/>
+            <point key="canvasLocation" x="-1972" y="33"/>
         </scene>
         <!--Locations-->
         <scene sceneID="54N-O3-9As">
