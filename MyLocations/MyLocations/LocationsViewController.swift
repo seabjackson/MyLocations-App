@@ -14,7 +14,7 @@ import CoreData
 class LocationsViewController: UITableViewController {
     
     var managedObjectcontext: NSManagedObjectContext!
-//    var locations = [Location]()
+    var locations = [Location]()
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest()
@@ -36,9 +36,9 @@ class LocationsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.blackColor()
-        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
-        tableView.indicatorStyle = .White
+    
+       // tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        // tableView.indicatorStyle = .White
         navigationItem.rightBarButtonItem = editButtonItem()
         performFetch()
         
@@ -107,7 +107,7 @@ class LocationsViewController: UITableViewController {
         label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
         label.textColor = UIColor(white: 1.0, alpha: 0.4)
         
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = UIColor.greenColor()
         
         let separatorRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 0.5, width: tableView.bounds.size.width, height: 0.5)
         let separator = UIView(frame: separatorRect)
@@ -115,7 +115,7 @@ class LocationsViewController: UITableViewController {
         
         let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
         let view = UIView(frame: viewRect)
-        view.backgroundColor = UIColor(white: 0, alpha: 0.85)
+       // view.backgroundColor = UIColor(white: 0, alpha: 0.85)
         view.addSubview(label)
         view.addSubview(separator)
         return view

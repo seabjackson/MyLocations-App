@@ -28,7 +28,7 @@ class CategoryPickerViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.blackColor()
+        // tableView.backgroundColor = UIColor.purpleColor()
         tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
         tableView.indicatorStyle = .White
         

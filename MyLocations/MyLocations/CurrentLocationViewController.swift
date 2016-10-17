@@ -22,7 +22,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var updatingLocation = false
     var lastLocationError: NSError?
     
-    // for reverse geocoding, that is converting gps coordinates to an actual address
+    // for reverse geocoding, that is convertinggps coordinates to an actual address
     let geocoder = CLGeocoder()
     var placemark: CLPlacemark?
     var performingReverseGeocoding = false
@@ -31,11 +31,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     var timer: NSTimer?
     
     
+    @IBOutlet weak var addLocationDetailsButton: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
     @IBOutlet weak var latitudeTextLabel: UILabel!
     @IBOutlet weak var longitudeTextLabel: UILabel!
@@ -121,7 +121,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         panelMover.fromValue = NSValue(CGPoint: containerView.center)
         panelMover.toValue = NSValue(CGPoint: CGPoint(x: centerX, y: containerView.center.y))
         panelMover.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        panelMover.delegate = self
+        // panelMover.delegate = self
         containerView.layer.addAnimation(panelMover, forKey: "panelMover")
         
         let logoMover = CABasicAnimation(keyPath: "position")
@@ -143,7 +143,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         logoButton.layer.addAnimation(logoRotator, forKey: "logoRotator")
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+     func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         containerView.layer.removeAllAnimations()
         containerView.center.x = view.bounds.size.width / 2
         containerView.center.y = 40 + containerView.bounds.size.height / 2
@@ -211,14 +211,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
-        // print("didUpdateLocations \(newLocation)")
         
-        // 1
         if newLocation.timestamp.timeIntervalSinceNow <  -5 {
             return
         }
         
-        // 2
         if newLocation.horizontalAccuracy < 0 {
             return
         }
@@ -228,7 +225,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             distance = newLocation.distanceFromLocation(location)
         }
         
-        // 3
         if location == nil || location!.horizontalAccuracy > newLocation.horizontalAccuracy {
             // 4
             lastLocationError = nil
@@ -286,7 +282,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         if let location = location {
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
             longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
-            tagButton.hidden = false
+            addLocationDetailsButton.hidden = false
             messageLabel.text = ""
             
             // look up address if the location is valid
@@ -307,7 +303,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             latitudeLabel.text = ""
             longitudeLabel.text = ""
             addressLabel.text = ""
-            tagButton.hidden = true
+            addLocationDetailsButton.hidden = true
             latitudeTextLabel.hidden = true
             longitudeTextLabel.hidden = true
             

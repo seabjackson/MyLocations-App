@@ -45,7 +45,7 @@ class LocationCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.blackColor()
+         backgroundColor = UIColor.blackColor()
         descriptionLabel.textColor = UIColor.whiteColor()
         descriptionLabel.highlightedTextColor = descriptionLabel.textColor
         addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
