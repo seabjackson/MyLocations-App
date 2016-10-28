@@ -97,12 +97,12 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotosCollectionViewCell
-        let photo = photos as! Photo
-        if let imageData = photo.imageURL {
-            cell.imageView.image = UIImage(data: imageData)
-        } else {
-            loadCellWithImage(cell, photo: photo)
-        }
+//        let photo = photos as! Photo
+//        if let imageData = photo.imageURL {
+//            cell.imageView.image = UIImage(data: imageData)
+//        } else {
+//            //loadCellWithImage(cell, photo: photo)
+//        }
         return cell
     }
 
