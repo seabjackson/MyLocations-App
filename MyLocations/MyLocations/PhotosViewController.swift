@@ -79,7 +79,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                 for photoLink in photoLinks {
                     let imageURL = photoLink
                     self.imageURLS.append(imageURL)
-                    self.photos.append(Photo(imageURL: imageURL, imageData: imageData)
+                 //   self.photos.append(Photo(imageURL: imageURL, imageData: imageData)
                 }
             }
         }
