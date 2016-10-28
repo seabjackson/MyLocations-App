@@ -96,8 +96,9 @@ class LocationDetailsViewController: UITableViewController {
     @IBAction func cancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
+
     
-    @IBAction func categoryPickerDidPickCategory(segue: UIStoryboardSegue) {
+    @IBAction func categoryPickerDidPickCategoryWithSegue(segue: UIStoryboardSegue) {
         let controller = segue.sourceViewController as! CategoryPickerViewController
         categoryName = controller.selectedCategoryName
         categoryLabel.text = categoryName

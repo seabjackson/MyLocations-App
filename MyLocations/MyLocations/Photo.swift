@@ -12,6 +12,8 @@ class Photo {
     var imageURL: String?
     var imageData: NSData?
     
+    // provide location attribute for photo
+    
     init(imageURL: String?, imageData: NSData?) {
         self.imageURL = imageURL
         self.imageData = imageData
