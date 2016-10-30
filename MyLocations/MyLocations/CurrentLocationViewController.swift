@@ -104,6 +104,19 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
+    
+    func animation(button: UIButton, keyPath: String, removedOnCompletion: Bool, fillMode: String, duration: Double, fromValue: NSValue, toValue: NSValue, timingFunction: CAMediaTimingFunction, key: String) {
+        let new = CABasicAnimation(keyPath: keyPath)
+        new.removedOnCompletion = removedOnCompletion
+        new.fillMode = fillMode
+        new.duration = duration
+        new.fromValue = fromValue
+        new.toValue = toValue
+        new.timingFunction = timingFunction
+        button.layer.addAnimation(new, forKey: key)
+    }
+    
+    
     func hideLogoView() {
         if !logoVisible { return }
         
@@ -124,24 +137,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         // panelMover.delegate = self
         containerView.layer.addAnimation(panelMover, forKey: "panelMover")
         
-        let logoMover = CABasicAnimation(keyPath: "position")
-        logoMover.removedOnCompletion = false
-        logoMover.fillMode = kCAFillModeForwards
-        logoMover.duration = 0.5
-        logoMover.fromValue = NSValue(CGPoint: logoButton.center)
-        logoMover.toValue = NSValue(CGPoint: CGPoint(x: -centerX, y: logoButton.center.y))
-        logoMover.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        logoButton.layer.addAnimation(logoMover, forKey: "logoMover")
         
-        let logoRotator = CABasicAnimation(keyPath: "transform.rotation.z")
-        logoRotator.removedOnCompletion = false
-        logoRotator.fillMode = kCAFillModeForwards
-        logoRotator.duration = 0.5
-        logoRotator.fromValue = 0.0
-        logoRotator.toValue = -2 * M_PI
-        logoRotator.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        logoButton.layer.addAnimation(logoRotator, forKey: "logoRotator")
+        animation(logoButton, keyPath: "position", removedOnCompletion: false, fillMode: kCAFillModeForwards, duration: 0.5, fromValue: NSValue(CGPoint: logoButton.center), toValue: NSValue(CGPoint: CGPoint(x: -centerX, y: logoButton.center.y)), timingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn), key: "logoMover")
+        
+        animation(logoButton, keyPath: "transform.rotation.z", removedOnCompletion: false, fillMode: kCAFillModeForwards, duration: 0.5, fromValue: 0.0, toValue: -2 * M_PI, timingFunction: CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn), key: "logoRotator")
     }
+    
+    
     
      func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         containerView.layer.removeAllAnimations()
