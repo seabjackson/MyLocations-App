@@ -36,9 +36,9 @@ class LocationsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-       // tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
-        // tableView.indicatorStyle = .White
+        tableView.backgroundColor = UIColor.blackColor()
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .White
         navigationItem.rightBarButtonItem = editButtonItem()
         performFetch()
         
@@ -101,21 +101,24 @@ class LocationsViewController: UITableViewController {
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let labelRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 14, width: 300, height: 14)
+        
         let label = UILabel(frame: labelRect)
         label.font = UIFont.boldSystemFontOfSize(11)
         
         label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
+        
         label.textColor = UIColor(white: 1.0, alpha: 0.4)
+        label.backgroundColor = UIColor.clearColor()
         
-        label.backgroundColor = UIColor.greenColor()
+        let separatorRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 0.5, width: tableView.bounds.size.width - 15, height: 0.5)
         
-        let separatorRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 0.5, width: tableView.bounds.size.width, height: 0.5)
         let separator = UIView(frame: separatorRect)
         separator.backgroundColor = tableView.separatorColor
         
         let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
+        
         let view = UIView(frame: viewRect)
-       // view.backgroundColor = UIColor(white: 0, alpha: 0.85)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.85)
         view.addSubview(label)
         view.addSubview(separator)
         return view
@@ -124,23 +127,22 @@ class LocationsViewController: UITableViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "EditLocation" {
-//            let navigationController = segue.destinationViewController as! UINavigationController
-//            let controller = navigationController.topViewController as! LocationDetailsViewController
-//            controller.managedObjectContext = managedObjectcontext
-//            
-//            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-//                let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
-//                controller.locationToEdit = location
-//            }
-//        }
+        if segue.identifier == "EditLocation" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! LocationDetailsViewController
+            controller.managedObjectContext = managedObjectcontext
+
+            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+                let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+                controller.locationToEdit = location
+            }
+        }
     }
 
 }
 
 extension LocationsViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        print("*** controllerWillChangeContent")
         tableView.beginUpdates()
     }
     
@@ -148,22 +150,18 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
             case .Insert:
-                print("*** NSFetchedResultsChangeInsert (object)")
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
             
             case .Delete:
-                print("*** NSFetchedResultsChangeDelete (object)")
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
                 
             case .Update:
-                print("*** NSFetchedResultsChangeUpdate (object)")
                 if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? LocationCell {
                     let location = controller.objectAtIndexPath(indexPath!) as! Location
                     cell.configureForLocation(location)
                 }
                 
             case .Move:
-                print("*** NSFetchedResultsChangeMove (object)")
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
            
@@ -173,11 +171,9 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            print("*** NSFetchedResultsChangeInsert (section)")
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
             
         case .Delete:
-            print("*** NSFetchedResultsChangeDelete (section)")
             tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
             
         case .Update:

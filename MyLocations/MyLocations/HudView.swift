@@ -18,7 +18,7 @@ class HudView: UIView {
         view.addSubview(hudView)
         view.userInteractionEnabled = false
         
-        // hudView.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
+        hudView.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
         hudView.showAnimated(animated)
         
         return hudView
@@ -48,10 +48,8 @@ class HudView: UIView {
     
     func showAnimated(animated: Bool) {
         if animated {
-            // 1
             alpha = 0
             transform = CGAffineTransformMakeScale(1.3, 1.3)
-            // 2
             UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
                 self.alpha = 1
                 self.transform = CGAffineTransformIdentity

@@ -52,6 +52,13 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         userLocation.append(location!)
+        
+        
+        if userLocation.count == 1 {
+            getThePhotoLinks()
+        }
+        
+        
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
         mapView.setRegion(region, animated: true)
@@ -79,8 +86,9 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                 for photoLink in photoLinks {
                     let imageURL = photoLink
                     self.imageURLS.append(imageURL)
-                 //   self.photos.append(Photo(imageURL: imageURL, imageData: imageData)
+                    self.photos.append(Photo(imageURL: imageURL, imageData: nil))
                 }
+                self.collectionView.reloadData()
             }
         }
     }
@@ -98,16 +106,38 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotosCollectionViewCell
         
-        // take photo.imageURL
+        
+        print("+++ \(indexPath)")
+        let photoIndex = indexPath.indexAtPosition(1)
+        
+        
         // download the image using getThePhotosLink
         
-//        let photo = photos as! Photo
-//        if let imageData = photo.imageURL {
-//            cell.imageView.image = UIImage(data: imageData)
-//        } else {
-//            //loadCellWithImage(cell, photo: photo)
-//        }
+        let photo = photos[photoIndex]
+        if let imageData = photo.imageData {
+            cell.imageView.image = UIImage(data: imageData)
+        } else {
+            loadCellWithImage(cell, photo: photo)
+        }
         return cell
+    }
+    
+    func loadCellWithImage(cell: PhotosCollectionViewCell, photo: Photo) {
+        cell.imageView.image = UIImage(named: "placeholder")
+        let url = NSURL(string: photo.imageURL!)!
+        FlickrClient.sharedInstance().downloadImages(url) { (data, error) in
+            guard (error == nil) else {
+                print("couldn't get imageData")
+                return
+            }
+            
+            performUIUpdatesOnMain {
+                photo.imageData = data!
+                let actualPhoto = UIImage(data: data!)
+                cell.imageView.image = actualPhoto
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

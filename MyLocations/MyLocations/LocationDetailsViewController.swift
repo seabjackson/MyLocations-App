@@ -107,19 +107,18 @@ class LocationDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // set up the appearance of the table view
-       // tableView.backgroundColor = UIColor.redColor()
-        //tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
-       // tableView.indicatorStyle = .White
+        tableView.backgroundColor = UIColor.blackColor()
+        tableView.separatorColor = UIColor(white: 1.0, alpha: 0.2)
+        tableView.indicatorStyle = .White
         
-//        descriptionTextView.textColor = UIColor.whiteColor()
-//        descriptionTextView.backgroundColor = UIColor.whiteColor()
+        descriptionTextView.textColor = UIColor.whiteColor()
+        descriptionTextView.backgroundColor = UIColor.blackColor()
         
-//        addPhotoLabel.textColor = UIColor.whiteColor()
-//        addPhotoLabel.highlightedTextColor = addPhotoLabel.textColor
-//        
-//        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
-//        addressLabel.highlightedTextColor = addressLabel.textColor
-//        
+        addPhotoLabel.textColor = UIColor.whiteColor()
+        addPhotoLabel.highlightedTextColor = addPhotoLabel.textColor
+        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+        addressLabel.highlightedTextColor = addressLabel.textColor
+
         if let location = locationToEdit {
             title = "Edit Location"
             if location.hasPhoto {
@@ -224,26 +223,26 @@ class LocationDetailsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-       // cell.backgroundColor = UIColor.blueColor()
+       cell.backgroundColor = UIColor.blackColor()
         if let textLabel = cell.textLabel {
-            //textLabel.textColor = UIColor.whiteColor()
-            //textLabel.highlightedTextColor = textLabel.textColor
+            textLabel.textColor = UIColor.whiteColor()
+            textLabel.highlightedTextColor = textLabel.textColor
         }
         
         if let detailLabel = cell.detailTextLabel {
-            //detailLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
-            //detailLabel.highlightedTextColor = detailLabel.textColor
+            detailLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+            detailLabel.highlightedTextColor = detailLabel.textColor
         }
         
         let selectionView = UIView(frame: CGRect.zero)
-        //selectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
-        //cell.selectedBackgroundView = selectionView
+        selectionView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        cell.selectedBackgroundView = selectionView
         
-//        if indexPath.row == 2 {
-//            let addressLabel = cell.viewWithTag(100) as! UILabel
-//            addressLabel.textColor = UIColor.whiteColor()
-//            addressLabel.highlightedTextColor = addressLabel.textColor
-//        }
+        if indexPath.row == 2 {
+            let addressLabel = cell.viewWithTag(100) as! UILabel
+            addressLabel.textColor = UIColor.whiteColor()
+            addressLabel.highlightedTextColor = addressLabel.textColor
+        }
     }
     
     func showImage(image: UIImage) {
