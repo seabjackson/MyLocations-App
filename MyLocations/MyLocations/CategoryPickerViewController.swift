@@ -22,7 +22,10 @@ class CategoryPickerViewController: UITableViewController {
         "House",
         "IceCream Vendor",
         "Landmark",
-        "Park"]
+        "Movie Theater",
+        "Park",
+        "Restaurant",
+        "School"]
     
     var selectedIndexPath = NSIndexPath()
     

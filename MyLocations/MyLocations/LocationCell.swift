@@ -59,8 +59,9 @@ class LocationCell: UITableViewCell {
         
          //makes rounded images
         photoImageView.layer.cornerRadius = photoImageView.bounds.size.width / 2
+        photoImageView.contentMode = .ScaleAspectFill
         photoImageView.clipsToBounds = true
-        separatorInset = UIEdgeInsets(top: 0, left: 82, bottom: 0, right: 0)
+        // separatorInset = UIEdgeInsets(top: 0, left: 82, bottom: 0, right: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
