@@ -17,6 +17,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    
     let locationManager = CLLocationManager()
     var userLocation = [CLLocation]()
     var photos: [Photo] = []
@@ -114,10 +115,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         
         print("+++ \(indexPath)")
         let photoIndex = indexPath.indexAtPosition(1)
-        
-        
-        // download the image using getThePhotosLink
-        
+    
         let photo = photos[photoIndex]
         if let imageData = photo.imageData {
             cell.imageView.image = UIImage(data: imageData)
@@ -129,6 +127,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     
     func loadCellWithImage(cell: PhotosCollectionViewCell, photo: Photo) {
         cell.imageView.image = UIImage(named: "placeholder")
+        cell.spinner.startAnimating()
         let url = NSURL(string: photo.imageURL!)!
         FlickrClient.sharedInstance().downloadImages(url) { (data, error) in
             guard (error == nil) else {
@@ -140,6 +139,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                 photo.imageData = data!
                 let actualPhoto = UIImage(data: data!)
                 cell.imageView.image = actualPhoto
+                cell.spinner.stopAnimating()
             }
         }
         
