@@ -72,8 +72,13 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func getThePhotoLinks() {
         FlickrClient.sharedInstance().searchPhotoByLocation(userLocation.last!.coordinate.latitude, longitude: userLocation.last!.coordinate.longitude) { (result, error) in
             
+            // present alert view if the photos can't be downloaded due to network error
             guard (error == nil) else {
-                print("couldn't find the photo links")
+                let alert = UIAlertController(title: "Couldn't download photos due to network failure", message: "", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(okAction)
+                
+                self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
             
