@@ -394,22 +394,22 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4us-Vf-dZj" id="IO9-mp-HeQ">
-                                    <frame key="frameInset" width="342" height="56.5"/>
+                                    <frame key="frameInset" width="341" height="56.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="placeholder" id="lry-TM-5ta">
-                                            <frame key="frameInset" minX="5.17%" minY="44.44%" width="52" height="52"/>
+                                            <frame key="frameInset" minX="5.02%" minY="44.44%" width="52" height="52"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="srp-Y4-z23">
-                                            <frame key="frameInset" minX="82" minY="8" height="21" maxX="22"/>
+                                            <frame key="frameInset" minX="81.5" minY="8" height="21" maxX="22.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cPQ-gC-yFF">
-                                            <frame key="frameInset" minX="82" minY="27" height="21" maxX="22"/>
+                                            <frame key="frameInset" minX="81.5" minY="27" height="21" maxX="22.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -478,11 +478,12 @@
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="4NQ-E4-p8k"/>
                     <connections>
                         <outlet property="mapView" destination="kfV-it-tqA" id="5SW-fE-1rS"/>
+                        <segue destination="JYT-XU-q4C" kind="modal" identifier="EditLocation" id="rC4-DX-vDF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNl-aY-Giz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-756.00000000000011" y="1096"/>
+            <point key="canvasLocation" x="-617" y="517"/>
         </scene>
         <!--Photos-->
         <scene sceneID="ZNa-ZD-0ED">
@@ -596,7 +597,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="vPk-49-A6C"/>
+        <segue reference="rC4-DX-vDF"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.93333333333333335" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

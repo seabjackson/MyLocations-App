@@ -252,7 +252,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 geocoder.reverseGeocodeLocation(newLocation, completionHandler: {
                     placemarks, error in
                     
-                    // print("*** Found placemarks: \(placemarks), error: \(error)")
                     self.lastGeocodingError = error
                     if error == nil, let p = placemarks where !p.isEmpty {
                         if self.placemark == nil {
@@ -262,6 +261,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                         self.placemark = p.last!
                     } else {
                         self.placemark = nil
+                        // present an alert if the location can't be found 
+                        let alert = UIAlertController(title: "Could not find location due to network failure", message: "", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(okAction)
+                        
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        return
                     }
                     
                     self.performingReverseGeocoding = false
