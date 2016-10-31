@@ -10,20 +10,22 @@ import UIKit
 import MapKit
 import CoreLocation
 
-private let reuseIdentifier = "PhotosCollectionCell"
-class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
+
+class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate {
+    
+    private let reuseIdentifier = "PhotosCollectionCell"
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     let locationManager = CLLocationManager()
     var userLocation = [CLLocation]()
     var photos: [Photo] = []
     var imageURLS = [String]()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -105,6 +107,33 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     }
     
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translationInView(scrollView).y < 0 {
+            changeTabBar(true, animated: false)
+        } else {
+            changeTabBar(false, animated: true)
+        }
+    }
+    
+    // Used this link to get the tab bar out of the way when scrolling
+    // http://stackoverflow.com/questions/31928394/ios-swift-hide-show-uitabbarcontroller-when-scrolling-down-up
+    func changeTabBar(hidden:Bool, animated: Bool){
+        let tabBar = self.tabBarController?.tabBar
+        if tabBar!.hidden == hidden{ return }
+        let frame = tabBar?.frame
+        let offset = (hidden ? (frame?.size.height)! : -(frame?.size.height)!)
+        let duration:NSTimeInterval = (animated ? 0.5 : 0.0)
+        tabBar?.hidden = false
+        if frame != nil
+        {
+            UIView.animateWithDuration(duration,
+                                       animations: {tabBar!.frame = CGRectOffset(frame!, 0, offset)},
+                                       completion: {
+                                        if $0 {tabBar?.hidden = hidden}
+            })
+        }
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
@@ -112,8 +141,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotosCollectionViewCell
         
-        
-        print("+++ \(indexPath)")
         let photoIndex = indexPath.indexAtPosition(1)
     
         let photo = photos[photoIndex]
@@ -150,15 +177,4 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

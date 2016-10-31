@@ -11,6 +11,9 @@ import UIKit
 extension UIImage {
     
     // resize image before adding to the table view as thumbnail
+    // used http://nshipster.com/image-resizing/ and Raywenderlich tutorial 3
+    // for input on how to create this extension
+    
     func resizedImageWithBounds(bounds: CGSize) -> UIImage {
         let horizontalRatio = bounds.width / size.width
         let verticalRatio = bounds.height / size.height

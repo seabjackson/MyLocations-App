@@ -45,11 +45,11 @@ class LocationCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-         backgroundColor = UIColor.blackColor()
-         descriptionLabel.textColor = UIColor.whiteColor()
-         descriptionLabel.highlightedTextColor = descriptionLabel.textColor
-         addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
-         addressLabel.highlightedTextColor = addressLabel.textColor
+        backgroundColor = UIColor.blackColor()
+        descriptionLabel.textColor = UIColor.whiteColor()
+        descriptionLabel.highlightedTextColor = descriptionLabel.textColor
+        addressLabel.textColor = UIColor(white: 1.0, alpha: 0.4)
+        addressLabel.highlightedTextColor = addressLabel.textColor
         
     
         
@@ -61,7 +61,7 @@ class LocationCell: UITableViewCell {
         photoImageView.layer.cornerRadius = photoImageView.bounds.size.width / 2
         photoImageView.contentMode = .ScaleAspectFill
         photoImageView.clipsToBounds = true
-        // separatorInset = UIEdgeInsets(top: 0, left: 82, bottom: 0, right: 0)
+        separatorInset = UIEdgeInsets(top: 0, left: 82, bottom: 0, right: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

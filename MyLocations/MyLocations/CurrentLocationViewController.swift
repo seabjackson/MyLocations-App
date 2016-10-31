@@ -228,14 +228,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         if location == nil || location!.horizontalAccuracy > newLocation.horizontalAccuracy {
-            // 4
+        
             lastLocationError = nil
             location = newLocation
             updateLabels()
             
-            // 5
             if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
-                // print("*** We're done!")
                 stopLocationManager()
                 configureGetbutton()
                 
@@ -246,7 +244,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             
             // The new code begins here:
             if !performingReverseGeocoding {
-               // print("*** Going to geocode")
                 performingReverseGeocoding = true
                 
                 geocoder.reverseGeocodeLocation(newLocation, completionHandler: {
@@ -267,7 +264,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                         alert.addAction(okAction)
                         
                         self.presentViewController(alert, animated: true, completion: nil)
-                        return
                     }
                     
                     self.performingReverseGeocoding = false
@@ -301,7 +297,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             } else if lastGeocodingError != nil {
                 addressLabel.text = "Error Finding Address"
             } else {
-                addressLabel.text = "No Address Found"
+                addressLabel.text = ""
             }
             
             latitudeTextLabel.hidden = false
@@ -378,12 +374,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func stopLocationManager() {
         if updatingLocation {
-            if let timer = timer {
-                timer.invalidate()
-            }
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
             updatingLocation = false
+            
+            if let timer = timer {
+                timer.invalidate()
+            }
         }
     }
     
@@ -412,8 +409,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func didTimeOut() {
-       // print("*** Time out")
-        
         if location == nil {
             stopLocationManager()
             

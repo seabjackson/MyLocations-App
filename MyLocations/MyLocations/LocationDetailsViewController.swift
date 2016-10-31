@@ -39,6 +39,7 @@ class LocationDetailsViewController: UITableViewController {
     var date = NSDate()
     var image: UIImage?
     var observer: AnyObject!
+    let compressionQuality: CGFloat = 0.5
     
     
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -73,7 +74,7 @@ class LocationDetailsViewController: UITableViewController {
                 location.photoID = Location.nextPhotoID()
             }
             
-            if let data = UIImageJPEGRepresentation(image, 0.5) {
+            if let data = UIImageJPEGRepresentation(image, compressionQuality) {
                 do {
                     try data.writeToFile(location.photoPath, options: .DataWritingAtomic)
                 } catch {
@@ -88,6 +89,7 @@ class LocationDetailsViewController: UITableViewController {
             fatalCoreDataError(error)
         }
         
+        // delay time in seconds
         afterDelay(0.6) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -184,15 +186,17 @@ class LocationDetailsViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
+    // dictate how tall each cell should be
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
-            
+        
+            // in section 0, row 0 set the height of the cell to 88
         case (0, 0):
             return 88
-            
+        // in section 1, any row set the height to 44 if the image is hidden, and 280 otherwise
         case (1, _):
             return imageView.hidden ? 44 : 280
-            
+        // in section 2, row 2 set up the height for the address label
         case (2, 2):
             addressLabel.frame.size = CGSize(width: view.bounds.size.width - 115, height: 10000)
             addressLabel.sizeToFit()
@@ -212,6 +216,7 @@ class LocationDetailsViewController: UITableViewController {
             return nil
         }
     }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
